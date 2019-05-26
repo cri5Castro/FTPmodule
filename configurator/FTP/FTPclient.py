@@ -72,8 +72,8 @@ class FTPclient():
         with ftplib.FTP(self.address) as ftp:
             try:
                 ftp.login(self.user,self.passw)
-                res = ftp.retrlines(LS)
-                if not res.starswith('226 Directory send OK'):
+                res = ftp.retrlines(LS+path)
+                if not res.startswith('226 Directory send OK'):
                     print('Failed while trying to list files')
             except ftplib.all_errors as e:
                 print('FTP error:', e)

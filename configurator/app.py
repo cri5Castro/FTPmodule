@@ -2,21 +2,22 @@
 #!/usr/bin/python3
 import argparse
 import sys
-from FTP import FTPclient
+from .FTP import FTPclient
 def configure(options):
     print('configuring router at ',options.addr)
+
 
 def getConfiguration(options):
     print("Retriving configuration File from ",options.addr)
 
+
 def listFiles(options):
-    
+    print('running listFiles', options)
     client = FTPclient(options.addr,options.user,options.password)
     client.listDirectory(options.path)
-    print('running listFiles', options)
     
 
-def main(args):
+def run(args):
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
@@ -30,7 +31,6 @@ def main(args):
     parser_getConfiguration.add_argument('addr',help="ip address to connect with")
     parser_getConfiguration.set_defaults(func=getConfiguration)
 
-
     # Create a listapps subcommand       
     parser_listFiles = subparsers.add_parser('list', help='list all files in a directory')
     parser_listFiles.add_argument('addr',help="ip address to connect with")
@@ -43,8 +43,4 @@ def main(args):
         sys.argv.append('--help')
     options = parser.parse_args()
     options.func(options)
-
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
     
