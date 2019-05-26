@@ -11,10 +11,11 @@ class FTPclient():
     """
     FTP client
     """
-    def __init__(self, address = '', user = 'rcp', passw = 'rcp'):
-        """ 
+    def __init__(self, address, user = 'rcp', passw = 'rcp'):
+        """
+        Arguments: 
+            address {str} -- [address  of the FTP SERVER] 
         Keyword Arguments:
-            address {str} -- [address  of the FTP SERVER] (default: {''})
             user {str} -- [user to access FTP SERVER] (default: {'rcp'})
             passw {str} -- [passw to access FTP SERVER] (default: {'rcp'})
         """
