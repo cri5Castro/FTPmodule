@@ -2,7 +2,7 @@
 #!/usr/bin/python3
 import argparse
 import sys
-
+from FTP import FTPclient
 def configure(options):
     print('configuring router at ',options.addr)
 
@@ -10,7 +10,11 @@ def getConfiguration(options):
     print("Retriving configuration File from ",options.addr)
 
 def listFiles(options):
-    print('running listFiles')
+    
+    client = FTPclient(options.addr,options.user,options.password)
+    client.listDirectory(options.path)
+    print('running listFiles', options)
+    
 
 def main(args):
     parser = argparse.ArgumentParser()
@@ -28,8 +32,11 @@ def main(args):
 
 
     # Create a listapps subcommand       
-    parser_listFiles = subparsers.add_parser('listFiles', help='list all files in a directory')
+    parser_listFiles = subparsers.add_parser('list', help='list all files in a directory')
     parser_listFiles.add_argument('addr',help="ip address to connect with")
+    parser_listFiles.add_argument('-user','-u',help="FTP user",default="rcp")
+    parser_listFiles.add_argument('-password','-p',help="FTP password",default="rcp")
+    parser_listFiles.add_argument('-path',help="Path to be listed",default="")
     parser_listFiles.set_defaults(func=listFiles)
     
     if len(sys.argv) <= 1:

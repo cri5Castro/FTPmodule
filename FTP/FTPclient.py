@@ -35,7 +35,7 @@ class FTPclient():
         """
         with ftplib.FTP(self.address) as ftp: 
             try:    
-                ftp.login(self.user,self.passw)  
+                ftp.login(self.user,self.passw)
                 with open(ipath, 'rb') as fp: #open file to be uploaded
                     res = ftp.storlines(STOR + (opath if opath else ipath), fp)
                     if not res.startswith('226 Transfer complete'):
@@ -61,8 +61,6 @@ class FTPclient():
                             os.remove(opath)
             except ftplib.all_errors as e:
                 print('FTP error:', e) 
-                if os.path.isfile(opath):
-                    os.remove(opath)
 
 
     def listDirectory(self,path=''):
