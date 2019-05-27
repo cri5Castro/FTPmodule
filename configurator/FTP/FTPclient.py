@@ -3,7 +3,7 @@ import ftplib
 import os
 
 STOR="STOR "
-LS="LIST"
+LS="LIST "
 RETR="RETR "
 
 
@@ -64,7 +64,8 @@ class FTPclient():
 
 
     def listDirectory(self,path=''):
-        """[summary]
+        """
+        Lists a directory from the FTP server
         
         Keyword Arguments:
             path {str} -- [description] (default: {''})
