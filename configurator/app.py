@@ -35,7 +35,9 @@ def run(args):
     parser_configure.set_defaults(func=upload)
     
     #create a getConfiguration subcommand
-    parser_getConfiguration = subparsers.add_parser('getConfiguration',aliases=["gc","gconfig"], help='configure router with address <addr>')
+    parser_getConfiguration = subparsers.add_parser('getConfiguration',
+                                                    aliases=["gc","gconfig"],
+                                                    help='get the coniguration file of the router with address <addr>')
     parser_getConfiguration.add_argument('addr',help="ip address to connect with")
     parser_getConfiguration.add_argument('-ipath', '-i', help="Path to store the file",default='startup-config')
     parser_getConfiguration.add_argument('-opath', '-o', help="Path to the desired file",default='startup-config')
