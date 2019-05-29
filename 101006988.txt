@@ -1,6 +1,6 @@
 SNMP Summary
 SISTEMA Linux
 Total RAM in machine 8078676
-Total RAM used: 187412
-Total RAM Free: 1089212
-TIMEUP 3691385
+Total RAM used: 401264
+Total RAM Free: 1303064
+TIMEUP 3727942
