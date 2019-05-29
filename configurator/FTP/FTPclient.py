@@ -37,7 +37,7 @@ class FTPclient():
             try:    
                 ftp.login(self.user,self.passw)
                 with open(ipath, 'rb') as fp: #open file to be uploaded
-                    res = ftp.storlines(STOR + (opath if opath else ipath), fp)
+                    res = ftp.storbinary(STOR + (opath if opath else ipath), fp)
                     print(res)
             except ftplib.all_errors as e:
                 print('FTP error:', e)
@@ -52,8 +52,8 @@ class FTPclient():
         with ftplib.FTP(self.address) as ftp:
             try:
                 ftp.login(self.user,self.passw)
-                with open(opath, 'w') as fp: #creating a file to store the desired file
-                    res = ftp.retrlines( RETR + ipath, fp.write) #retriving file from FTP SERVER
+                with open(opath, 'wb') as fp: #creating a file to store the desired file
+                    res = ftp.retrbinary( RETR + ipath, fp.write) #retriving file from FTP SERVER
                     print(res)
             except ftplib.all_errors as e:
                 print('FTP error:', e) 
