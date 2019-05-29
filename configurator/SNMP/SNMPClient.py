@@ -4,13 +4,18 @@ class SNMPClient:
     def __init__(self,addr,community):
         self.addr = addr
         self.community = community
-        self.oids = [("RAM", "1.3.6.1.4.1.2021.4.5.0"), ("SISTEMA", "1.3.6.1.2.1.1.1.0")]
+
+        self.oids = [("SISTEMA", "1.3.6.1.2.1.1.1.0"),
+			("Total RAM in machine", "1.3.6.1.4.1.2021.4.5.0"), ("Total RAM used:", "1.3.6.1.4.1.2021.4.6.0"),
+			("Total RAM Free:", "1.3.6.1.4.1.2021.4.11.0"),
+        ("TIMEUP", "1.3.6.1.2.1.25.1.1.0")]
     def getInventory(self):
         #client= SNMP(self.addr,self.community)
         inventory = "SNMP Summary\n"
         for name, oid in self.oids:
         	inventory += name + " " + self.consultaSNMP(self.community, self.addr, oid) + "\n"
-        file = open("inventory"+".txt", "w")
+        name = self.addr.replace(".", "")
+        file = open(name+".txt", "w")
         file.write(inventory)
         file.close()
         print(inventory)
