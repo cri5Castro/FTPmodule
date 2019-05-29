@@ -1,1 +1,1 @@
-from .TELNET import TelnetClient
+from .TelnetClient import TelnetClient

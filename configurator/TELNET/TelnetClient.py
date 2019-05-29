@@ -1,29 +1,33 @@
 import telnetlib
 ASCII="ascii"
-class Telnetclient():
+
+class TelnetClient():
     def __init__(self,address,user = 'rcp', passw = 'rcp'):
         self.address = address
         self.user = user
         self.passw = passw
     
-    def test():
+    def test(self):
         with telnetlib.Telnet(self.address) as tnSess:
             tnSess.read_until(b"User: ")
-            tnSess.write(user.encode(ASCII)+b"\n")
-            tnSess.write(user.encode(ASCII)+b"\n")
+            tnSess.write(self.user.encode(ASCII)+b"\n")
+            tnSess.write(self.user.encode(ASCII)+b"\n")
             tnSess.write(b"show running-config\n")
             
-    def sendCommands(commands):
+    def sendCommands(self,commands):
         with telnetlib.Telnet(self.address) as tnSess:
             tnSess.read_until(b"User: ")
-            tnSess.write(user.encode(ASCII)+b"\n")
-            tnSess.write(user.encode(ASCII)+b"\n")
-            for i in commands:
-                tnSess.write(commands.encode(ASCII))
-            tn.write(b"exit\n")
+            tnSess.write(self.user.encode(ASCII)+b"\n")
+            tnSess.write(self.user.encode(ASCII)+b"\n")
+            for command in commands:
+                tnSess.write(command.encode(ASCII))
+            tnSess.write(b"exit\n")
     
     ### interact
-            
+    def interact(self):
+        with telnetlib.Telnet(self.address) as tnSess:
+            tnSess.interact()
+                
                 
     
     

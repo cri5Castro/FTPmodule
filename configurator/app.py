@@ -3,6 +3,7 @@
 import argparse
 import sys
 from .FTP import FTPclient
+from .TELNET import TelnetClient
 """
 reconbrar configure y getconfiguration a upload y download 
 y en sulgar implenetar un script que suba el archivo y que usando telnet lo ponga como running config
@@ -11,6 +12,11 @@ y vicevers usando telnet generar startup congif usando copy y descargarlo
 
 """
 
+def interactTelnet(options):
+    client=TelnetClient(options.addr,options.user,options.password)
+    client.interact()
+    
+    
 def listFiles(options):
     print('running listFiles', options)
     client = FTPclient(options.addr,options.user,options.password)
@@ -66,6 +72,23 @@ def run(args):
     parser_listFiles.add_argument('-password','-p',help="FTP password",default="rcp")
     parser_listFiles.add_argument('-path',help="Path to be listed",default="")
     parser_listFiles.set_defaults(func=listFiles)
+    
+    # Create a interact subcommand       
+    parser_interact = subparsers.add_parser('interact',aliases=["int"], help='connects to a remote terminal using telnet')
+    parser_interact.add_argument('addr',help="ip address to connect with")
+    parser_interact.add_argument('-user','-u',help="Telnet user",default="rcp")
+    parser_interact.add_argument('-password','-p',help="Telnet password",default="rcp")
+    parser_interact.set_defaults(func=interactTelnet)
+    
+    
+    #TODO juanito 
+    # Create a interact inventory       
+    parser_getInventory = subparsers.add_parser('getInventory',aliases=["getInv"], help='get the system information of a SNMP agent')
+    parser_getInventory.add_argument('addr',help="ip address to connect with")
+    parser_getInventory.add_argument('com',help="snmp community of the agent",default="rcp")
+    parser_getInventory.set_defaults(func=getInventory)
+    
+    
     
     if len(sys.argv) <= 1:
         sys.argv.append('--help')
