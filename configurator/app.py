@@ -4,6 +4,7 @@ import argparse
 import sys
 from .FTP import FTPclient
 from .TELNET import TelnetClient
+from .SNMP import SNMPClient
 """
 reconbrar configure y getconfiguration a upload y download 
 y en sulgar implenetar un script que suba el archivo y que usando telnet lo ponga como running config
@@ -41,7 +42,8 @@ def getConfiguration(options):
     pass
     
 def getInventory(options):
-    pass
+    client  = SNMPClient(options.addr,options.com)
+    client.getInventory()
 
 def run(args):
     parser = argparse.ArgumentParser()
