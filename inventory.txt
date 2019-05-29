@@ -1,3 +1,7 @@
 SNMP Summary
+<<<<<<< HEAD
 RAM 508900
+=======
+RAM 8078676
+>>>>>>> 5a8bc438f3b8b4e7ec1e9b571ca6e17e71cb21a4
 SISTEMA Linux
