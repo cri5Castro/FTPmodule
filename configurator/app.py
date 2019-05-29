@@ -28,12 +28,14 @@ def download(options):
     client = FTPclient(options.addr,options.user,options.password)
     client.getFile(options.ipath,options.opath)
     
-def configure(options):pass
+def configure(options):
+    pass
 
-def getConfiguration(options):pass
-
-def 
+def getConfiguration(options):
+    pass
     
+def getInventory(options):
+    pass
 
 def run(args):
     parser = argparse.ArgumentParser()
