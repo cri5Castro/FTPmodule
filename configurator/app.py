@@ -3,7 +3,13 @@
 import argparse
 import sys
 from .FTP import FTPclient
+"""
+reconbrar configure y getconfiguration a upload y download 
+y en sulgar implenetar un script que suba el archivo y que usando telnet lo ponga como running config
+y vicevers usando telnet generar startup congif usando copy y descargarlo
 
+
+"""
 
 def listFiles(options):
     print('running listFiles', options)
@@ -22,29 +28,37 @@ def download(options):
     client = FTPclient(options.addr,options.user,options.password)
     client.getFile(options.ipath,options.opath)
     
+def configure(options):pass
+
+def getConfiguration(options):pass
+
+def 
+    
 
 def run(args):
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
 
-    # Create a configure subcommand    
-    parser_configure = subparsers.add_parser('configure',aliases=["c","config"], help='configure router with address <addr>')
-    parser_configure.add_argument('addr',help="ip address to connect with")
-    parser_configure.add_argument('-ipath', '-i', help="Path of the file to be sent",default='startup-config')
-    parser_configure.add_argument('-opath', '-o', help="Path to store the file",default='startup-config')
-    parser_configure.set_defaults(func=upload)
+    # Create a upload subcommand    
+    parser_upload = subparsers.add_parser('upload',aliases=["up"], help='upload a file to a FTP SERVER with address <addr>')
+    parser_upload.add_argument('addr',help="ip address to connect with")
+    parser_upload.add_argument('-ipath', '-i', help="Path of the file to be sent",default='startup-config')
+    parser_upload.add_argument('-opath', '-o', help="Path to store the file",default='startup-config')
+    parser_upload.add_argument('-user','-u',help="FTP user",default="rcp")
+    parser_upload.add_argument('-password','-p',help="FTP password",default="rcp")
+    parser_upload.set_defaults(func=upload)
     
-    #create a getConfiguration subcommand
-    parser_getConfiguration = subparsers.add_parser('getConfiguration',
-                                                    aliases=["gc","gconfig"],
-                                                    help='get the coniguration file of the router with address <addr>')
-    parser_getConfiguration.add_argument('addr',help="ip address to connect with")
-    parser_getConfiguration.add_argument('-ipath', '-i', help="Path to store the file",default='startup-config')
-    parser_getConfiguration.add_argument('-opath', '-o', help="Path to the desired file",default='startup-config')
-    parser_getConfiguration.set_defaults(func=download)
+    #create a downloa subcommand
+    parser_download = subparsers.add_parser('download',aliases=["dw","down"],help='download  a file from a FTP SERVER with address <addr>')
+    parser_download.add_argument('addr',help="ip address to connect with")
+    parser_download.add_argument('-ipath', '-i', help="Path to store the file",default='startup-config')
+    parser_download.add_argument('-opath', '-o', help="Path to the desired file",default='startup-config')
+    parser_download.add_argument('-user','-u',help="FTP user",default="rcp")
+    parser_download.add_argument('-password','-p',help="FTP password",default="rcp")
+    parser_download.set_defaults(func=download)
     
     # Create a listapps subcommand       
-    parser_listFiles = subparsers.add_parser('list',aliases=["l"], help='list all files in a directory')
+    parser_listFiles = subparsers.add_parser('list',aliases=["l"], help='list all files in a directory <path> from a FTP SERVER <addr>')
     parser_listFiles.add_argument('addr',help="ip address to connect with")
     parser_listFiles.add_argument('-user','-u',help="FTP user",default="rcp")
     parser_listFiles.add_argument('-password','-p',help="FTP password",default="rcp")

@@ -38,8 +38,7 @@ class FTPclient():
                 ftp.login(self.user,self.passw)
                 with open(ipath, 'rb') as fp: #open file to be uploaded
                     res = ftp.storlines(STOR + (opath if opath else ipath), fp)
-                    if not res.startswith('226 Transfer complete'):
-                        print('Upload failed')
+                    print(res)
             except ftplib.all_errors as e:
                 print('FTP error:', e)
     
@@ -55,10 +54,7 @@ class FTPclient():
                 ftp.login(self.user,self.passw)
                 with open(opath, 'w') as fp: #creating a file to store the desired file
                     res = ftp.retrlines( RETR + ipath, fp.write) #retriving file from FTP SERVER
-                    if not res.startswith('226 Transfer complete'):
-                        print('Download failed')
-                        if os.path.isfile(opath):
-                            os.remove(opath)
+                    print(res)
             except ftplib.all_errors as e:
                 print('FTP error:', e) 
 
