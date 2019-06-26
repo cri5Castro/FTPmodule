@@ -2,6 +2,12 @@ from pysnmp.hlapi import *
 
 class SNMPClient:
     def __init__(self,addr,community):
+        """SNMP client to gather the information of a snmp server
+		
+		Arguments:
+			addr {[str]} -- [ip address of the snmp server]
+			community {[str]} -- [snmp community of the snmp server]
+		"""
         self.addr = addr
         self.community = community
 
@@ -10,6 +16,12 @@ class SNMPClient:
 			("Total RAM Free:", "1.3.6.1.4.1.2021.4.11.0"),
         ("TIMEUP", "1.3.6.1.2.1.25.1.1.0")]
     def getInventory(self):
+        """Obtains the system information of a SNMP server
+			and store this information in a file.
+		Returns:
+			[str] -- a formated string of the snmp server
+
+		"""
         #client= SNMP(self.addr,self.community)
         inventory = "SNMP Summary\n"
         for name, oid in self.oids:
@@ -22,6 +34,16 @@ class SNMPClient:
         return inventory
 
     def consultaSNMP(self, community, host, oid, port = 161):
+        """
+		executes a snmp query
+		Arguments:
+			community {[str]} -- [snmp community of the snmp server]
+			host {[str]} -- [ip address of the snmp server]
+			oid {[str]} -- [object id to be requested]
+		
+		Keyword Arguments:
+			port {int} -- [connection port for the snmp server ] (default: {161})
+		"""
 	    errorIndication, errorStatus, errorIndex, varBinds = next(
 	        getCmd(SnmpEngine(),
 	               CommunityData(community),
