@@ -5,13 +5,7 @@ import sys
 from .FTP import FTPclient
 from .TELNET import TelnetClient
 from .SNMP import SNMPClient
-"""
-reconbrar configure y getconfiguration a upload y download 
-y en sulgar implenetar un script que suba el archivo y que usando telnet lo ponga como running config
-y vicevers usando telnet generar startup congif usando copy y descargarlo
 
-
-"""
 GENERATE_CONFIG=["enable","copy run start"]
 
 def interactTelnet(options):
