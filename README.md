@@ -20,3 +20,8 @@ python -m configurator <command> <options>*
 
 optional arguments:
   -h, --help            show this help message and exit
+
+**Requeriments**
+- ftplib
+- telnetlib
+- pysnmp
