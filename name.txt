@@ -1,3 +1,0 @@
-SNMP Summary
-RAM 8078676
-SISTEMA Linux
